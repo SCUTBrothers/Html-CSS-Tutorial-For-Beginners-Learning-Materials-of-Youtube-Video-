@@ -1,3 +1,181 @@
+/* 本css代码按照alloy team的css代码规范中的属性声明顺序进行编写，以形成良好的习惯 */
+
 @font-face {
-  font-family: fas;
+  font-family: "Font Awesome";
+  src: url("../../font-awesome/webfonts/fa-brands-400.woff");
+}
+
+.fab {
+  font-family: "Font Awesome";
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  height: 100vh;
+}
+
+ul {
+  display: flex;
+
+  width: 400px;
+}
+
+ul li {
+  /*
+    flex-grow代表如果父元素flex-box中有空余的空间，
+    将剩余空间平均分配给flex-box每个flex-item子元素,
+    从而可以达到行内每个元素宽度相等的目的(如果每个元素的内容宽度相同的话)
+
+    关于flex-grow及flex布局可以参见:
+    [Flexbox - CSS Reference | 免费的 CSS 属性可视化文档](http://cssreference.parryqiu.com/flexbox/#align-content)
+     */
+  flex-grow: 1;
+
+  margin: 0 5px;
+
+  list-style: none;
+}
+
+ul li a {
+  display: flex;
+  overflow: hidden; /* 隐藏溢出<a>中的伪元素::before, ::after */
+
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+
+  text-decoration: none;
+
+  width: 50px;
+  height: 50px;
+
+  text-align: center;
+
+  background-color: #f1f1f1;
+
+  /*
+  当 <a>被hover时，让<a>的背景颜色发生变化，而不是让其伪元素颜色发生变化(我一开始想
+  这么做，但是发现太麻烦了，而且效果没有那么好)
+  */
+  transition: background-color 0.25s ease-in-out;
+}
+
+/* 分别设置每个<a>被hover时的背景颜色变化 */
+ul li:nth-child(1) a:hover {
+  background-color: #4768a1;
+}
+
+ul li:nth-child(2) a:hover {
+  background-color: #20aeed;
+}
+
+ul li:nth-child(3) a:hover {
+  background-color: #eb795f;
+}
+
+ul li:nth-child(4) a:hover {
+  background-color: #0072b5;
+}
+
+ul li:nth-child(5) a:hover {
+  background-color: #c74790;
+}
+a i {
+  color: transparent; /* 设置文档流中字体图标不可见，字体图标通过伪元素来显示 */
+}
+
+ul li a::before,
+ul li a::after {
+  /* 设置上下两个伪元素::before, ::after的统一行为
+    1. flex + justify + align-items center 使其中字体图标居中
+    2. position: absolute + top 0, right 0, bottom 0, left: 0
+        使伪元素转为块元素，并且在水平和竖直方向上被强制拉伸，最终与包含块
+        的尺寸相同，相当于是做了一个"遮罩". 详细可以见《CSS世界》:绝对定位格式化
+        高度和宽度
+    3. 统一设置font-family，用于指定content中unicode的字体
+    4. 统一设置伪元素位置变换和字体颜色的过渡效果
+*/
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  font-family: "Font Awesome";
+
+  color: #78746f;
+
+  transition: transform 0.25s ease-in-out, color 0.25s ease-in-out;
+}
+
+/* 在伪元素中使用字体图标只能是指定字体的font-famliy，以及相应字体图标的字符unicode
+    参见font awesome的 css pseudo-element的字体图标设置
+*/
+.link-facebook::before,
+.link-facebook::after {
+  content: "\f0d5";
+}
+
+.link-twitter::before,
+.link-twitter::after {
+  content: "\f099";
+}
+
+.link-google::before,
+.link-google::after {
+  content: "\f0d5";
+}
+
+.link-linkedin::before,
+.link-linkedin::after {
+  content: "\f0e1";
+}
+
+.link-instagram::before,
+.link-instagram::after {
+  content: "\f16d";
+}
+
+/*
+    通过标签选择器，统一设置a中伪元素在纵向的位置变换：
+        hover前  ::before刚好遮住<a>, translateY(0),
+                ::after位于<a>的底部
+        hover后 ::before位于<a>的顶部，translateY(-100%)
+                ::after刚好遮住<a>
+
+    > Note: 我这里采用伪元素，而不是像视频那样，是因为避免在html源码中多添加一个无意义的字体标签
+            尽量通过伪元素来创建视觉效果
+
+*/
+ul li a::before {
+  transform: translateY(0);
+}
+
+ul li a::after {
+  color: #fff;
+
+  transform: translateY(100%);
+}
+
+ul li a:hover::before {
+  transform: translateY(-100%);
+}
+
+ul li a:hover::after {
+  transform: translateY(0);
 }
