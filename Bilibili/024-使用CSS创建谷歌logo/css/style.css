@@ -1,0 +1,48 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 130px;
+  height: 130px;
+
+  border-radius: 50%;
+  border: 50px solid #fff;
+  border-top-color: #e94433;
+  border-right-color: #4385f3;
+  border-bottom-color: #32a953;
+  border-left-color: #f9b604;
+}
+
+.logo::before {
+  content: "";
+  position: absolute;
+
+  /* top和left的值需要自己在chrome中调整 */
+  top: -147px;
+  left: 77px;
+  /* 绘制三角形 */
+  border-top: 100px solid transparent;
+  border-right: 100px solid #fff;
+  border-bottom: 100px solid transparent;
+  border-left: 100px solid transparent;
+  transform: rotate(90deg);
+}
+
+.logo::after {
+  /* 绘制长方形 */
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  height: 50px;
+  background: #4385f3;
+  /* translate的值需要自己在chrome中调整 */
+  transform: translate(-7px, -12px);
+}

@@ -1,0 +1,179 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+body
+{
+    background: #0a2a43;
+    min-height: 1500px;
+}
+
+section
+{
+    position:relative;
+    width: 100%;
+    height: 100vh; /* vh单位：当前窗口可见区域的高度 */
+    overflow: hidden;
+
+    /* 
+        子元素绝对定位和相对定位不影响弹性布局(好像是这样的...)
+        临时记忆：子元素flaot和display:inline-block在父元素的flex布局中会失效
+    */
+    display: flex;
+
+    /* 
+        justify-content: center;
+        align-items: center;
+        这两段代码是为了对齐<h2> Moon Light </h2>   
+    */
+    justify-content: center;
+    align-items: center; 
+}
+
+section::before{
+    /* 
+        在section底部添加一个与body同宽，高度为100px的完全透明线性渐变区域
+    */
+
+    /* 
+        与背景颜色相同的线性渐变加上后面的颜色混叠，能够在底部达到模糊边缘的效果，
+        使得边缘不会那么明显，图像能够更好地融入背景区域。
+        不知道啥设计原理....
+    */
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(to top, #0a2a43, transparent);
+    z-index: 10000;
+}
+
+section::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0a2a43;
+    /* 颜色混叠 */
+    mix-blend-mode: color;
+    z-index: 10000;
+}
+
+section img
+{
+    /* 
+        通过给四张图像同时设置绝对定位，并将它们左上边界点设置
+        到包含块原点(左上角点)，达到将四张图像层叠在一起的目的    
+    */
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    /* 
+        * width设置为100%，使图像宽度与section宽度相同
+        * height设置为100%，使图像高度与section高度相同，即与
+            视口高度相同
+        * 当使浏览器窗口水平方向或垂直方向上变窄时，section宽度和高度会随之发生变化
+    */
+    width: 100%;
+    height: 100%;
+
+    /* 
+    object-fit: cover; 
+        * 将替换元素(图片)填满整个内容区 
+        * 保持原图片的比例
+        * 可能会造成图片被裁剪的问题
+        * ref: [CSS3 object-fit和object-position_w3cschool](https://www.w3cschool.cn/lugfe/lugfe-6lwy25zj.html)
+
+    关于object-fit:
+        * 详细解读：[半深入理解CSS3 object-position/object-fit属性 « 张鑫旭-鑫空间-鑫生活](https://www.zhangxinxu.com/wordpress/2015/03/css3-object-position-object-fit/)
+            * 博客关键内容：
+                1. 替换元素为不受可视格式化模型控制的元素，通常哟拥有固定的尺寸：固定宽度、固定高度和固定比率。
+                    常见替换元素为<img>、<iframe>、<video>等
+                2. <img>是替换元素，通过img src链接插入的图片为替换内容
+                3. width和height设定的是<img>元素的尺寸
+                4. object-fit控制的是src插入的替换内容(图片)的行为
+                
+    * 关于object-fit: cover的个人补充
+        * cover对图片的控制，就相当于我们平常对图片的放缩控制行为。我们将鼠标放在图像的右下角，
+            然后拖动鼠标缩放图像，使得图片边界贴着<img>元素的边界(右边界与右边界贴紧或者下边界与
+            下边界贴紧)，**直到图片占满<img>元素的内容区**。另外需要注意的是，cover控制过程中，
+            不改变图片的比例，就像我们通常拖动鼠标放缩图片，不会改变图片比例一样。
+
+        * 类似问题：[css - object-fit, object-positioning and absolute positioning - Stack Overflow](https://stackoverflow.com/questions/55415719/object-fit-object-positioning-and-absolute-positioning)
+        * 在线测试： [object-fit:cover](https://codepen.io/scutbrothers/pen/KKaeGpX)
+        * 应用： [(205) How to use CSS object-fit to control your images - YouTube](https://www.youtube.com/watch?v=6yAAV-uP0po)
+    */
+    object-fit: cover;
+    pointer-events:none;
+}
+
+#text{
+    /*  
+        这里把position:relative和z-index:1同时注释掉，
+        #text会隐藏，很奇怪。关于这一点，见后续 [重要内容]
+    */
+    position: relative;
+    /* 
+        z-index属性值可以不需要定义。定义的话能够更好的操纵文档流平面外
+        的元素的堆叠顺序 
+    */
+    /* z-index: 1; */
+    z-index: 1;
+
+    color: #fff;
+    font-size: 6vw; /* 1vw=视口宽度的1% */
+}
+
+#road{
+    z-index: 2;
+}
+
+/* 
+    **重要内容-元素堆叠顺序**
+    section::before、section::after、img和h2同处于一个堆叠上下文当中
+
+    按元素在section当中的顺序进行排列，并给出它们的定位和z-index
+    section::before
+        * postion: absolute
+        * z-index: 10000
+
+    section::after
+        * postion: absolute
+        * z-index: 10000
+
+    img
+        * position: absolute
+        * z-index(未定义，默认为auto)
+
+    #road
+        * posiiton: absolute
+        * z-index: 2
+    
+    #text
+        * position: relative
+        * z-index(未定义，默认为auto)
+
+    堆叠顺序规则(ref: [Learn Z-Index Using a Visualization Tool](https://thirumanikandan.com/posts/learn-z-index-using-a-visualization-tool))
+        同级堆叠上下文中，元素堆叠顺序
+        - Positioned elements with negative z-index values
+        - Non positioned elements - elements with value static
+        - Positioned elements with a z-index value of auto
+        - Positioned elements with positive z-index values
+        还需要加两条
+        - 相同z-index的positioned elments，后定义的元素显示在更前面
+        - z-index均为auto的positioned elements, 后定义的元素显示在更前面
+    堆叠顺序规则测试
+        [z-index](https://codepen.io/scutbrothers/pen/LYxrxZx)
+
+    根据上述规则，该例子中元素的堆叠顺序为: 
+        section::after > section::before > #road > #text > img
+
+
+*/

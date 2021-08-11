@@ -1,0 +1,72 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #ff1b38;
+}
+
+ul {
+  /* 经典的水平和垂直居中写法 */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+ul li {
+  list-style: none;
+
+  /* 使用float，margin写单行水平布局 */
+  float: left;
+  margin: 10px;
+  width: 100px;
+  height: 100px;
+
+  /* 让li的内联元素(<img>)居中 */
+  text-align: center;
+
+  /* 通过border-radius绘制圆形形状 */
+  border-radius: 50%;
+  background-color: #fff;
+
+  /* 子绝父相，让子元素::before和img相对li定位 */
+  position: relative;
+}
+
+ul li::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #ff1b38;
+  border-radius: 50%;
+  transform: scale(0);
+  transition: 0.5s ease-in-out;
+}
+
+ul li:hover::before {
+  /* 目前用::before伪元素结合transform: scale(0) 到scale(1)这种
+        悬停(hover)的动画效果好像还蛮多的
+    */
+  transform: scale(0.9);
+}
+
+ul li img {
+  /* 设定img的百分比尺寸，以设置了尺寸的父元素为参考。
+        设定尺寸是为了防止图像尺寸过大，溢出父盒子的范围
+    */
+  width: 50%;
+  height: 50%;
+
+  /* 让img在父元素li中居中 */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  z-index: 1;
+}

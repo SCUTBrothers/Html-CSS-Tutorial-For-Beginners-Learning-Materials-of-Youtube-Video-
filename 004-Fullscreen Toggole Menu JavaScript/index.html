@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>004-Fullscreen Toggole Menu JavaScript</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div id="toggle-icon" onclick="menuToggle()">
+
+    </div>
+    <div id="menu-overlay">
+        <ul>
+            <!-- href="#" ： 链接当前页面-->
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Abount</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Portfolio</a></li>
+            <li><a href="#">Our Team</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </div>
+    <script>
+        function menuToggle() {
+            // 向id="menu-overlay"中的元素的class类列表属性中添加active，使得该元素属于类active
+            var nav = document.getElementById('menu-overlay');
+            nav.classList.toggle('active');
+
+            var toggleIcon = document.getElementById('toggle-icon');
+            toggleIcon.classList.toggle('active');
+        }
+    </script>
+</body>
+
+</html>

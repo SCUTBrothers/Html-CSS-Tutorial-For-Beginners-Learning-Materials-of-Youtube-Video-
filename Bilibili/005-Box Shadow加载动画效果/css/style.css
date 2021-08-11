@@ -1,0 +1,84 @@
+body {
+    margin: 0;
+    padding: 0;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #2196f3;
+}
+
+.loader {
+    position: relative;
+    display: flex;
+}
+
+.loader span {
+    width: 50px;
+    height: 300px;
+    margin: 0 20px;
+    background: #2196f3;
+    
+    /* animation:animation-name | duration | timing-function | literation-count  */
+    animation: animate 1.4s linear infinite;
+}
+
+/* 设定蓝色长条动画效果的延迟时间，使每个蓝色长条逐个出现和消失 */
+.loader span:nth-child(1) {
+    animation-delay: 0s;
+}
+.loader span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.loader span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+.loader span:nth-child(4) {
+    animation-delay: 0.6s;
+}
+
+.loader span:nth-child(5) {
+    animation-delay: 0.8s;
+}
+
+.loader span:nth-child(6) {
+    animation-delay: 1s;
+}
+
+.loader span:nth-child(7) {
+    animation-delay: 1.2s;
+}
+
+@keyframes animate {
+    /* 制造单个蓝色长条从左向右移动，上升下落的视觉效果 */
+    0% {
+        /* box-shadow: x-excursion y-excursion blur-radius rgba(); */
+        box-shadow: 0 0 0 rgba(0, 0, 0, 0.5);
+
+        /* 0代表完全透明，opcity使元素整体透明，而rgba中的alpha只是使颜色透明*/
+        opacity: 0;
+        transform: translateX(-50px) scale(1);
+    }
+
+    50% {
+        box-shadow: 0 20px 50px rgba(0, 0, 0.5);
+        opacity: 1;
+        transform: translateX(0) scale(1.2);
+    }
+    
+    100% {
+        box-shadow: 0 0 0 rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        transform: translateX(50px) scale(1);
+    }
+    /* 
+        阴影设置个人理解：
+            * 想象这样一个场景，我们将蓝色长条拿起，竖直上方的散射灯光照射在蓝色长条上，
+                此时可以看到，长条下面会有阴影。阴影面偏移原位置，并且会有明显模糊效果。
+            * 这只是对于这个例子想法的解释，实际阴影的产生更加复杂。
+            * 通过上面的阴影动画设置，从视觉感受上来说，蓝色长条就好像被拿起，又放下。或者说，
+                浮上来又沉下去
+    */
+}

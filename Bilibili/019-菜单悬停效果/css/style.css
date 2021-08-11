@@ -1,0 +1,77 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+/* 父元素居中 加 子元素水平布局*/
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.container li {
+  list-style: none;
+  position: relative;
+}
+
+.container li a {
+  text-decoration: none;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: black;
+}
+
+/* 
+    实现鼠标悬浮出现小长条的过渡动画效果
+    前面的例子中，有两个例子都使用到了类似的过渡动画效果，如果有忘记的话，
+    可以复习一下,模式是基本相同的:
+    前面的例子用的是：
+        伪元素+绝对定位生成小长条
+        scale(0)/scale(1)+transition显示和隐藏长条，并添加过渡效果
+        transition-origin：调整变换的原点
+    这个例子用的是：
+        伪元素+绝对定位生成小长条
+        width:0;隐藏长条。width=50%显示长条(长条宽度为父元素的一半)，transform:translateX(100%)移动元素
+        通过transition设置元素宽度变化和位置变化的过渡动画
+        transition前状态：
+        width:0;
+        transform: none;
+
+        transition后状态：
+        width:50%;
+        transform: translateX(100%)
+        注：translateX中的百分比是以自身尺寸为基准进行移动的。所以这里是：
+            1. 先让长条的宽度为50%(相对父元素)，此时长条宽度为父元素宽度的一半，左边界与父元素左边界重合
+            2. 然后设置translateX(100%)，让长条向右移动自己的左边界，移动距离为自身尺寸的100%，最终位于父元素的右半边。
+
+        transition结束后，会自动过渡回到自己的初始状态(transition前的状态)，也会有一个过渡效果
+            */
+
+.container li::before {
+  /* 可以在li中生成伪元素，也可以在a中生成伪元素，看自己习惯 */
+  content: " ";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  height: 5px;
+  width: 0;
+  background-color: #04bdd5;
+  transition: 0.5s;
+}
+
+.container li:hover::before {
+  /* 
+    这里注意不要将::before写在:hover伪类前面 
+    */
+  width: 50%;
+  transform: translateX(100%);
+}

@@ -1,0 +1,46 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #334aff;
+}
+
+.circle {
+  /* 双居中(垂直+水平) */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  /* 绘制圆形 */
+  /* 
+    这个绘制圆形的方法在Bilibili/008中也出现过，我觉得可以作为一个小代码片段(code-snippet)
+    以下为我在vscode当中自定义的小代码片段
+    "draw-circle": {
+        "scope": "css",
+        "prefix": "draw-circle",
+        "body": [
+        "width: $1px;",
+        "height: $2px;",
+        "border-radius: 50%;",
+        "border: $3px solid $4);",
+    ]
+  }
+    */
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 10px solid rgba(255, 255, 255, 0.1);
+
+  border-top: 10px solid #fff;
+  animation: animate 1.5s infinite linear;
+}
+
+@keyframes animate {
+  /* 这里要记得加translate(-50%, -50%)，否则不会居中 */
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}

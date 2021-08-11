@@ -1,0 +1,128 @@
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #ff4f4f;
+}
+
+.bubbles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.bubbles li {
+  list-style: none;
+  position: absolute;
+  bottom: 100px;
+  background-color: rgba(255, 255, 255, 0.2);
+  /* animation: animation-name animation-duration animation-linear animaiton-literation-count*/
+  animation: animate 20s linear infinite;
+  transform-origin: bottom;
+}
+
+/* 分别设置li(共10个)·的动画延时和尺寸及尺寸， 以达到li按延时顺序分个展示li方块的动画的目的*/
+/* 
+    li的动画延时(animation-delay)：
+        1. 0s
+        2. 2s
+        3. 4s
+        4. 18s
+        5. 0s
+        6. 3s
+        7. 7s
+        8. 15s
+        9. 2s
+        10. 4s
+    这里的left, width和height以及animation-delay可以随便设置，只是一种视觉效果而已，不是本例的重点
+    本例的重点是设置有着不同的尺寸和位置，但是动画效果相同的小方块(li)，在不同的时刻展示相同的动画流程。
+    通过修改animaiton-duration来改变关键帧之间的间隔，进而改变动画帧的播放速率。这个在练习的时候随便设置就好了
+*/
+
+.bubbles li:nth-child(1) {
+  left: 10%;
+  width: 20px;
+  height: 20px;
+  animation-delay: 0s;
+  animation-duration: 10s;
+}
+.bubbles li:nth-child(2) {
+  left: 40%;
+  width: 60px;
+  height: 60px;
+  animation-delay: 2s;
+  animation-duration: 20s;
+}
+.bubbles li:nth-child(3) {
+  left: 60%;
+  width: 35px;
+  height: 35px;
+  animation-delay: 4s;
+  animation-duration: 12s;
+}
+.bubbles li:nth-child(4) {
+  left: 35%;
+  width: 20px;
+  height: 20px;
+  animation-delay: 18s;
+  animation-duration: 15s;
+}
+.bubbles li:nth-child(5) {
+  left: 25%;
+  width: 80px;
+  height: 80px;
+  animation-delay: 0s;
+  animation-duration: 20s;
+}
+.bubbles li:nth-child(6) {
+  left: 65%;
+  width: 20px;
+  height: 20px;
+  animation-delay: 3s;
+  animation-duration: 18s;
+}
+.bubbles li:nth-child(7) {
+  left: 70%;
+  width: 20px;
+  height: 20px;
+  animation-delay: 7s;
+  animation-duration: 25s;
+}
+.bubbles li:nth-child(8) {
+  left: 75%;
+  width: 20px;
+  height: 20px;
+  animation-delay: 15s;
+  animation-duration: 25s;
+}
+.bubbles li:nth-child(9) {
+  left: 80%;
+  width: 60px;
+  height: 60px;
+  animation-delay: 2s;
+  animation-duration: 20s;
+}
+.bubbles li:nth-child(10) {
+  left: 45%;
+  width: 100px;
+  height: 100px;
+  animation-delay: 4s;
+  animation-duration: 16s;
+}
+
+@keyframes animate {
+  from {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+    border-radius: 0;
+  }
+
+  to {
+    transform: translateY(-1000px) rotate(720deg);
+    opacity: 0;
+    border-radius: 50%;
+  }
+}

@@ -1,0 +1,29 @@
+/* 
+    本例重点：伪元素::selection。
+        伪元素：伪元素是一个附加至选择器末尾的关键词，允许你对**被选择元素的特定部分**修改样式。
+        ::selection: 
+            * 功能：返回元素被用户选中的部分(如使用鼠标, shift+方向键或其他选择设备选中的部分)，==常用于修改文档中被用户高亮(选中)的部分的样式==
+            * 适用性：只有一小部分属性可以用于::selection选择器
+                color
+                background-color
+                cursor
+                caret-color
+                outline and its longhands
+                text-decoration and its associated properties
+                text-emphasis-color (en-US)
+                text-shadow
+    ref:
+        1. [::selection - CSS（层叠样式表） | MDN](https://developer.mozilla.org/zh-CN/docs/Web/CSS/::selection)
+        2. [::selection - CSS（层叠样式表） | MDN](https://developer.mozilla.org/zh-CN/docs/Web/CSS/::selection)
+
+*/
+
+h1::selection {
+  background-color: #f00;
+  color: yellow;
+}
+
+p::selection {
+  background-color: #262626;
+  color: #fff;
+}

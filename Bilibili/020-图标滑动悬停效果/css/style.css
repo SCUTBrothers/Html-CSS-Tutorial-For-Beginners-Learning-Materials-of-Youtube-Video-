@@ -1,0 +1,54 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #262626;
+}
+
+ul {
+  margin: 300px auto;
+  width: 50%;
+}
+
+ul li {
+  list-style: none;
+  float: left;
+  text-align: center;
+  width: 33.33%;
+}
+
+ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+ul li a .fa {
+  font-size: 4em;
+  transform: translateY(10px) scale(1);
+  transition: 0.5s;
+}
+
+/* 
+    文字的过渡效果：
+        1.从下方 向 上方移动
+        2. 文字逐渐显现出来
+*/
+ul li a .text {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: 0.2s;
+}
+
+ul li a:hover .text {
+  opacity: 1;
+  transform: translateY(-20px);
+}
+
+/* 
+    图标的过渡效果
+        1. 图标从下方 向上方移动
+        2. 图标缩小
+*/
+ul li a:hover .fa {
+  transform: translateY(-20px) scale(0.5);
+}

@@ -1,0 +1,95 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.banner{
+    width: 100%;
+    height: 100vh; /* vh: 1vh=1%*视口当前高度 */
+    overflow: hidden;
+    /*
+        以游戏的方式学习flex布局：[Flexbox Froggy - A game for learning CSS flexbox](https://flexboxfroggy.com/)
+    */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.banner video{
+    /* 
+        通过绝对定位和坐标设定<video>的位置
+    */
+    position: absolute;
+    top: 0;
+    left: 0;
+
+
+    width: 100%;
+    height: 100%;
+    /* 
+    # notes on object-fit
+    注： video和img一样是属于替换元素
+    object-fit: cover; 
+        * 将替换元素(图片)填满整个内容区 
+        * 保持原图片的比例
+        * 可能会造成图片被裁剪的问题
+        * ref: [CSS3 object-fit和object-position_w3cschool](https://www.w3cschool.cn/lugfe/lugfe-6lwy25zj.html)
+
+    关于object-fit:
+        * 详细解读：[半深入理解CSS3 object-position/object-fit属性 « 张鑫旭-鑫空间-鑫生活](https://www.zhangxinxu.com/wordpress/2015/03/css3-object-position-object-fit/)
+            * 博客关键内容：
+                1. 替换元素为不受可视格式化模型控制的元素，通常哟拥有固定的尺寸：固定宽度、固定高度和固定比率。
+                    常见替换元素为<img>、<iframe>、<video>等
+                2. <img>是替换元素，通过img src链接插入的图片为替换内容
+                3. width和height设定的是<img>元素的尺寸
+                4. object-fit控制的是src插入的替换内容(图片)的行为
+                
+    * 关于object-fit: cover的个人补充
+        * cover对图片的控制，就相当于我们平常对图片的放缩控制行为。我们将鼠标放在图像的右下角，
+            然后拖动鼠标缩放图像，使得图片边界贴着<img>元素的边界(右边界与右边界贴紧或者下边界与
+            下边界贴紧)，**直到图片占满<img>元素的内容区**。另外需要注意的是，cover控制过程中，
+            不改变图片的比例，就像我们通常拖动鼠标放缩图片，不会改变图片比例一样。
+
+        * 类似问题：[css - object-fit, object-positioning and absolute positioning - Stack Overflow](https://stackoverflow.com/questions/55415719/object-fit-object-positioning-and-absolute-positioning)
+        * 在线测试： [object-fit:cover](https://codepen.io/scutbrothers/pen/KKaeGpX)
+        * 应用： [(205) How to use CSS object-fit to control your images - YouTube](https://www.youtube.com/watch?v=6yAAV-uP0po)
+    */
+    object-fit: cover;
+
+    pointer-events: none;
+}
+.banner .content{
+    position: relative;
+    z-index: 1;
+
+    /* 设置最大宽度，防止子元素<p>的文本内容将.content撑开 */
+    max-width: 1000px;
+
+    /* 
+        使.content在.banner当中垂直居中 
+            * margin: 上下 左右；
+        使子元素文本居中对齐
+            * text-align: center；
+    */
+    margin: 0 auto;
+    text-align: center;
+}
+.banner .content h1{
+    /* 将<h1>的默认margin和padding清零 */
+    margin: 0;
+    padding: 0;
+
+    font-size: 4.5em;
+
+    /* 英文字母全部大写 */
+    text-transform: uppercase;
+
+    color: white;
+}
+
+.banner .content p{
+    font-size: 1.5em;
+    color: white;
+    /* 文本两端对齐视觉效果更佳 */
+    text-align: justify;
+}

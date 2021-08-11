@@ -1,0 +1,36 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.box {
+  width: 100%;
+  height: 100vh;
+  background: url("../assets/images/bg.jpg") center/cover no-repeat;
+}
+h1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: 0;
+  padding: 0;
+  transform: translate(-50%, -50%);
+  font-size: 8em;
+  text-transform: uppercase;
+  text-align: center;
+  color: #fff;
+  text-shadow: 0 5px 10px rgba(0, 0, 0, 1);
+
+  /* 
+    mix-blend-mode(本例子中的核心)：CSS的混合模式与合成特性，相当于PS当中的图层混合。
+        * overlay(叠加)
+            
+        * 关于混合模式的学习资料：
+            * [一篇文章彻底搞清PS混合模式的原理 - 知乎](https://zhuanlan.zhihu.com/p/23905865)
+            * [(209) CSS Transparent Text Effects - CSS blend mode Text Effects - Glass Text Effects Tutorial - YouTube](https://www.youtube.com/watch?v=kqtxpl-vxjw&list=PL5e68lK9hEzdYG6YQZCHtM9gon_cDNQMh&index=11)
+  */
+  mix-blend-mode: overlay;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.2);
+}

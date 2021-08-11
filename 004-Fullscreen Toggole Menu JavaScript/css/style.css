@@ -1,0 +1,128 @@
+* {
+    margin: 0;
+    padding: 0;
+
+}
+
+#menu-overlay{
+    /* 
+        上下作用的fixed元素坐标均设置为0，如果width和height均为auto，
+        则会使得该元素自动拉伸，覆盖整个父元素(body)
+    */
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    
+    background-color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+    
+    transform: scale(0);
+    transition: 0.5s;
+}
+
+#menu-overlay.active {
+    transform: scale(1);
+}
+
+#menu-overlay ul li {
+    list-style: none;
+    text-align: center;
+}
+
+#menu-overlay ul li a {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    font-size: 4em;
+    color: #fff;
+    font-weight: 700;
+    text-transform: uppercase;
+    
+}
+
+#menu-overlay ul li a::before {
+    /* 在每个a元素的中间生成一个黄色的细长条 */
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background: #ff0;
+
+    /* 
+        translateY(r%)
+            * 以Y轴为参照轴(默认为元素的垂直中心轴)，移动自身宽度的r%像素。r为正代表向下移动，
+                r为负值代表向上移动
+            
+        - 这里通过tanslateY(-50%)使黄条垂直居中
+
+        scaleX(0)
+            * 以变换原点为基准点，将元素整体沿着X轴进行缩放
+            * 变换原点(transform-origin)默认位于元素中心
+                * transform-origin: right时，scaleX则代表向右缩放元素整体
+    */
+    transform: translateY(-50%) scaleX(0);
+    transform-origin: right;
+
+        /* 
+        过渡状态：
+            * 根据初始状态设置的样式过渡到最终状态的样式，**过渡时间和属性以过渡的目标状态(最终状态)设置的transition为准**
+            * 初始状态： 鼠标悬停(hover)， scaleX(1), transform-origin: left;
+            * 最终状态：鼠标未悬停(not hover)， scaleX(0)，transform-orgin: right;
+        过渡视觉动画效果：黄条以右端(right)为参考线，向左(left)缩小，从1缩小到0。从视觉上看黄条向左收缩到0。实质上是不断对黄条进行缩小所展示的过渡效果
+    */
+    transition: transform 0.5s;
+}
+
+#menu-overlay ul li a:hover::before {
+    /* 
+        a:hover::before：匹配被:hover(鼠标悬停)的a元素，并且选择其中的::before伪元素(在这里貌似是
+        如果事先在a元素中生成了::before伪元素，则会选择它，如果没有事先生成，则会生成这么一个伪元素)
+
+        注意!!：
+            * 不能写成a::before:hover，因为伪元素只能写在最后一个简单选择器序列的尾部，而伪元素不是一个选择器
+                * 一个简单的选择器可以是：通配选择器*，类型选择器type, 属性选择器[attributes], 类型选择器.class， ID选择器#id，或者伪类:pseudo-class
+                * 而伪元素并不是一个选择器，尽管它类似于一个选择器
+            * 当鼠标悬停在a元素而不是::before生成的伪元素之上时，这个样式规则才会被触发
+            ref: [css - How to write :hover condition for a:before and a:after? - Stack Overflow](https://stackoverflow.com/questions/5777210/how-to-write-hover-condition-for-abefore-and-aafter)
+            test: [Edit fiddle - JSFiddle - Code Playground](http://jsfiddle.net/sandeep/PJspQ/1/)
+    */
+
+    /* 
+        :hover变换状态：黄条尺寸为原始尺寸的1倍，变换原点为left
+    */
+    transform: translateY(-50%) scaleX(1);
+    transform-origin: left;
+
+    /* 
+        过渡状态：
+            * 根据初始状态设置的样式过渡到最终状态的样式，**过渡时间和属性以过渡的目标状态(最终状态)设置的transition为准**。
+                如果最终状态没有设置transition属性，则以初始状态的transition属性为准。
+            * 初始状态：鼠标未悬停(not hover)， scaleX(0)，transform-orgin: right;
+            * 最终状态： 鼠标悬停(hover)， scaleX(1), transform-origin: left;
+        过渡视觉动画效果：黄条以左端(left)为参考线，向右(right)放大，从0放大到1。从视觉上看黄条向右逐渐延展开来。实质上是不断对黄条进行放大所展示的过渡效果
+    */
+
+    transition: transform 0.5s;
+}
+
+#toggle-icon {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background: #ff0 url("../assets/images/open.png") no-repeat;
+    z-index: 1;
+    cursor: pointer;
+}
+
+#toggle-icon.active {
+    background-image: url("../assets/images/close.png");
+}

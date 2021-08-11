@@ -1,0 +1,103 @@
+body {
+  /* 
+  个人发现在这个新手项目中，下面的初始化写法是很常用的。
+  这种初始化写法以及常用的水平和垂直居中写法等等，可以总结成代码片段，
+  作为code snippets集成到ide当中，这样可以结合如vscode, codepen等的自动补全功能提高开发效率。
+  比如初始化我用简写base来唤醒，水平和垂直居中用b-center(both center)来唤醒
+  
+  如果是准备面试，可以将常见写法总结到笔记当中，这个就不多说了
+  */
+  margin: 0;
+  padding: 0;
+
+  font-family: sans-serif;
+  background: #262626;
+}
+
+.box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  /* width和heigth要与图片的尺寸相同 */
+  width: 640px;
+  height: 383px;
+  background: #000;
+}
+
+.about {
+  position: absolute;
+
+  /* 绝对定位元素的top以距离最近的position非static值的祖先元素(包含块)
+        的左上角点为原点进行位移计算。
+        这里也就是以.box作为包含块确定坐标系原点
+    */
+  top: 50%;
+  transform: translateY(-50%);
+
+  /* 
+        通过text-align: center 结合 transform: translateY(-50%)
+        实现文本块.about在其父盒子中垂直居中对齐，然后文本在.about当中水平居中对齐，
+        这样整体就是一个水平和垂直居中的效果
+        snippets-name: b-center-box-text
+    */
+  text-align: center;
+
+  color: #fff;
+  padding: 40px;
+}
+
+.about h2 {
+  margin: 0;
+  padding: 0;
+  font-size: 30px;
+  text-transform: uppercase;
+}
+
+.box .figure::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: url("../assets/images/split-image.jpg") no-repeat;
+  transform-origin: bottom;
+  transition: 0.2s;
+}
+
+.box:hover .figure::before {
+  /* 
+    transform-origin为bottom。
+    此时z轴向屏幕外，x轴水平向右且贴着::before元素底部，
+    y轴竖直向下
+
+    rotateX(<deg>)为元素绕x轴三维旋转角度<deg>后在xoy平面上的投影.
+    rotateX(90deg)相当于将元素垂直与xoy平面，此时我们看到的元素投影面积为0.
+  */
+  transform: rotateX(90deg) translateY(50%);
+}
+
+.box .figure::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  background: url("../assets/images/split-image.jpg") no-repeat;
+
+  /* 
+  设置背景图片偏移，使背景图片右半部分出现在右边的容器当中
+  background-position: -320px; 代表将背景图片相对容器向左偏移-320px，
+  而320px刚好为背景图片尺寸的一半
+  */
+  background-position: -320px;
+  transform-origin: top;
+  transition: 0.2s;
+}
+
+.box:hover .figure::after {
+  transform: rotateX(90deg) translateY(-50%);
+}

@@ -1,0 +1,95 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: sans-serif;
+  height: 100vh;
+  background: url("../assets/images/bg.jpg") center/cover no-repeat;
+}
+
+.login-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  width: 420px;
+  height: 450px;
+  background-color: rgba(232, 226, 219, 0.6);
+  padding: 80px 20px 40px;
+}
+
+.login-box .user {
+  /* 
+        对于图片居中，我写的代码是：
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateY(-50%, -50%);
+            overflow: hidden;
+        效果是一样的
+    */
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: calc(-100px / 2);
+  left: calc(50% - 50px);
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.login-box h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.login-box form label {
+  font-weight: bold;
+}
+
+.login-box form input {
+  outline: none;
+  border: none;
+  background-color: transparent;
+  width: 100%;
+}
+
+.login-box form input {
+  outline: none;
+  border: none;
+  background-color: transparent;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.login-box form input[type="email"],
+.login-box form input[type="password"] {
+  border-bottom: 2px solid #e6c999;
+}
+
+.login-box form input[type="email"]:focus,
+.login-box form input[type="password"]:focus {
+  border-bottom: 2px solid black;
+}
+
+.login-box form input[type="submit"] {
+  background-color: #e6c999;
+  height: 40px;
+  border-radius: 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.login-box form input[type="submit"]:hover {
+  background-color: black;
+  color: #fff;
+}
+
+.login-box form a {
+  text-decoration: none;
+  color: black;
+}

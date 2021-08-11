@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- <section>
+        <img id="bg" src="../assets/bg.jpg" alt="">
+        <img id="moon" alt="" src="../assets/moon.png" >
+        <img id="mountain" src="../assets/mountain.png" alt="">
+        <img id="road" src="../assets/road.png" alt="">
+        <h2 id="text">Moon Light</h2>
+    </section> -->
+        
+        <section>
+        <img src="../images/bg.jpg" alt="" id="bg">
+        <img src="../images/moon.png" alt="" id="moon">
+        <img src="../images/mountain.png" alt="" id="mountain">
+        <img src="../images/road.png" alt="" id="road" >
+        <h2 id="text">Moon Light</h2>
+    </section> 
+
+    <script>
+        let bg = document.getElementById('bg');
+        let moon = document.getElementById('moon');
+        let mountain = document.getElementById('mountain');
+        let road = document.getElementById('road');
+        let text = document.getElementById('text');
+        window.addEventListener('scroll', function () {
+            // window.scrollY(可读，双精度类型)：返回当前从原点垂直滚动文档的像素数
+            let value = window.scrollY;
+
+            /*
+                * top = value(scrollY)使背景图像距离原点的距离等于文档已经滚动的像素距离，
+                    这样能够使背景图像上边缘一直贴着视口上边界。
+                * 由于其余图像设置了绝对定位，因此后面的图像会将前面的背景图像覆盖(后面图像的z-index更大？)。
+                * 因为section设置了overflow: hidden，所以背景图像向下滚动时，穿出section
+                    的部分会被隐藏。
+                * 0.5可以不设置，不影响效果。可能是为了四舍五入？
+            */
+            bg.style.top = value + 0.5 + 'px';
+
+            /*
+                随着页面向下滚动，月亮往左上方移动
+                * 月亮图像会默认向上方移动，所以设置它的左移动就行
+                * 因为section设置了overflow: hidden，所以moon图像向左移动时，穿出section
+                    的部分会被隐藏。
+                * 搞不明白为什么要+0.5
+            */
+            moon.style.left = -value + 0.5 + 'px';
+            mountain.style.top = -value * 0.15 + 'px';
+            road.style.top = value * 0.15 + 'px';
+            text.style.top = value * 1 + 'px';
+        })
+    </script>
+
+</body>
+
+</html>

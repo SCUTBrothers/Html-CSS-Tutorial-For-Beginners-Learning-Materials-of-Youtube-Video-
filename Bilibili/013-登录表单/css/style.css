@@ -1,0 +1,128 @@
+body {
+  font-family: sans-serif;
+}
+
+body::before {
+  /* 
+  通过filter:blur()进行背景模糊
+  ref: [CSS设置背景模糊的实现方法_CSS教程_CSS_网页制作_脚本之家](https://www.jb51.net/css/642105.html)
+  */
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  background: url("../assets/images/rainbow_cup.jpg") left/cover no-repeat;
+  filter: blur(15px);
+  z-index: -1;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.title {
+  text-align: center;
+
+  padding: 50px 0 30px;
+}
+
+.title h1 {
+  text-transform: uppercase;
+  color: #262626;
+  font-size: 60px;
+}
+
+.container {
+  /* 
+  这里不宜用以下代码实现居中：
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+  因为.container元素会脱离常规文档流，无法往上顶到.title的下边界。
+  当使用绝对定位，且窗口宽度较小时，.container会将.title的内容覆盖
+  */
+  width: 50%;
+  height: 400px;
+  margin: 0 auto;
+  background-color: #fff;
+  border: 2px solid #fff;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+}
+
+.container .left {
+  float: left;
+  width: 50%;
+  height: 100%;
+  background: url("../assets/images/rainbow_cup.jpg") left/cover;
+
+  /* 不知道设置box-sizing的意义何在，改变宽度的计算方式？在我看来是没有必要的 */
+  box-sizing: border-box;
+}
+
+.container .right {
+  float: right;
+  width: 50%;
+}
+
+.form-box {
+  /* 
+    这里需要将box-sizing设置为border-box，也即修改width的计算方式为boder区,
+    border区=border + padding + content(内容区)。
+    这种做法能够将宽度设置作用于元素的可见区域(margin是不可见的，其余都是可见的)，
+    从而更好将元素的可见区域控制在父元素当中.
+
+    ref: <精通CSS 高级Web解决方案> 第三版-p41
+    
+    这里不太推荐使用margin的方式设置.form-box的边距
+  */
+  box-sizing: border-box;
+  width: 100%;
+  padding: 80px 40px;
+
+  height: 100%;
+}
+
+.form-box form label {
+  color: #bdcd6f;
+  font-weight: bold;
+}
+
+.form-box form input {
+  display: block;
+  margin-bottom: 20px;
+  height: 40px;
+}
+
+.form-box form input[type="text"],
+.form-box form input[type="password"] {
+  width: 100%;
+  border: none;
+  outline: none;
+  border-bottom: 2px solid #bdcd6f;
+}
+
+.form-box form input[type="text"]:focus,
+.form-box form input[type="password"]:focus {
+  border-bottom: 2px solid #262626;
+}
+
+.form-box form input[type="submit"] {
+  width: 100%;
+  border: none;
+  outline: none;
+  background-color: #262626;
+  color: #fff;
+  cursor: pointer;
+}
+
+.form-box form input[type="submit"]:hover {
+  background-color: #bdcd6f;
+}
+
+.form-box a {
+  color: #262626;
+  font-size: 12px;
+  font-weight: bold;
+}

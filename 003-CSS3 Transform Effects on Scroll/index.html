@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS3 Transform Effects on Scroll</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <section>
+        <h1>
+            Be aware of all copycat youtubers!
+        </h1>
+        <span class="curve">
+            <img src="assets/images/curve.png" alt="">
+        </span>
+
+    </section>
+    <script>
+        // querySelector(CSS selectors)
+        //  * 返回文档中匹配指定CSS选择器的一个元素
+        var scroll = document.querySelector('.curve');
+
+        window.addEventListener('scroll', function () {
+
+            // 缩放比例需要在[0, 1]范围内. 所以这里要1 + ...，以在滚动条
+            // 没有滚动时，缩放值设置为1.
+            var value = 1 + window.scrollY / (-500);
+
+            /*
+                ``表示js当中的template literal语法，用于连接字符串，
+                是+号连接字符串的高级写法。
+                这里`scaleY(${value})`相当于 "scaleY(" + value + ")"
+            */
+            // 通过缩小scaleY，达到元素压扁的效果
+            scroll.style.transform = `scaleY(${value})`;
+        })
+    </script>
+</body>
+
+</html>

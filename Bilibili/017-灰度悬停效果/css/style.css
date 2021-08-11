@@ -1,0 +1,21 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #1f1f1f;
+}
+
+img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 320px;
+  height: 213px;
+  /* 本例的重点就是：能够对滤镜(filter)设置过渡效果 */
+  filter: grayscale(0%);
+  transition: 0.5s all ease-in-out;
+}
+
+img:hover {
+  filter: grayscale(100%);
+}

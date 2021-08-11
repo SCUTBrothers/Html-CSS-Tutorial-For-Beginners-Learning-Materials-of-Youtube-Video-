@@ -1,0 +1,75 @@
+*{
+    /* 初始化 */
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    height: 200vh;
+    background: #111;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: #111;
+}
+
+section{
+    position: absolute;
+    width: 100%;
+    /* 
+        height
+            * 注意：这里的100%是相对于视口(viewport)的高度，不是body
+            * 解释：
+                1. section为绝对定位
+                2. 绝对定位的盒子高度以包含块而不是父元素的高度为基准进行百分比计算
+                3. 绝对定位的盒子的包含块是距离它最近的定位祖先，也就是第一个postion不为static的祖先元素
+                    (祖先元素position设置为absolute也是包含块，只要非static就行)
+                4. 这里body和html的position均默认为static，所以section的高度不是以html为基准进行计算
+                5.html元素所在的包含块是一个被称为**初始包含块**的矩形。他的尺寸是视口(viewport)或分页媒体page media
+                
+                根据以上5点，可以知道section的包含块为初始包含块，百分比高度也是以初始包含块的高度(视口的高度)为基准进行计算
+            ref: [布局和包含块 - CSS（层叠样式表） | MDN](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Containing_block)
+     */
+    height: 100%;
+
+    /* 背景颜色设置为curve.png图片的颜色 */
+    background: #2abbff;
+    /* background: red; */
+
+    /* flex布局使内容水平居中和垂直居中 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+section .curve{
+    /* 
+    .curve的包含块为section，将.curve向下移动200px,
+    并在后面的样式规则中，令img高度为100%，相当于将图片高度设置为200px。
+    在视觉效果上，弧形图片紧贴着section的底部。
+    */
+    position: absolute;
+    bottom: -200px;
+    
+    width: 100%;
+    height: 200px;
+
+    /* 
+        transform-origin默认在元素的中心，将其设置为top，以在js中设置Y方向
+        缩放(scaleY())时，元素是向上缩放，而不是以中心缩放，这样从视觉效果上
+        看元素的上边界一直保持不变
+        
+    */
+    transform-origin: top;
+}
+
+section .curve img{
+    width: 100%;
+    height: 100%;
+}
+
+section h1{
+    font-size: 4em;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+}
