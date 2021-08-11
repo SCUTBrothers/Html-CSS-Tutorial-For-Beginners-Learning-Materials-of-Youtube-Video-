@@ -1,5 +1,7 @@
 /* 本css代码按照alloy team的css代码规范中的属性声明顺序进行编写，以形成良好的习惯 */
 
+/* css代码是自己编写的，与视频代码略有不同，效果一样的，大家可以参考一下 */
+
 @font-face {
   font-family: "Font Awesome";
   src: url("../../font-awesome/webfonts/fa-brands-400.woff");
@@ -65,7 +67,7 @@ ul li a {
 
   /*
   当 <a>被hover时，让<a>的背景颜色发生变化，而不是让其伪元素颜色发生变化(我一开始想
-  这么做，但是发现太麻烦了，而且效果没有那么好)
+  这么做，但是发现太麻烦了，而且效果没有那么好)。这也是我练习该示例的最大收获
   */
   transition: background-color 0.25s ease-in-out;
 }
