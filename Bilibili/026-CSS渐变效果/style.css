@@ -38,7 +38,7 @@ body {
   position: absolute;
 
   width: 100%;
-  height: 15px;
+  height: 15px; /* height要设置为background-size的宽度的一半，隐藏多余的部分
 
   /* 可以设置多个背景图片，按照声明的顺序进行重叠 */
   background-image: linear-gradient(
@@ -57,6 +57,11 @@ body {
     );
 
   background-size: 30px 60px;
+  /*
+    背景尺寸宽高比要设置为1:2，这样背景区域为可被分为两个正方形的矩形
+    当渐变线方向为45或-45时，经过上面的设置，渐变色在两个正方形的平行对角线间的区域是非透明的,
+    颜色为#ff8d8d，形状为由两个等腰直角三角形组成的平行四边形
+  */
 
   transform: rotateX(180deg);
 
