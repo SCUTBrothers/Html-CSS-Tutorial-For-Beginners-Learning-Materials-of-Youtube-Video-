@@ -1,0 +1,64 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  position: relative;
+
+  height: 100vh;
+
+  background-color: #fe8d8c;
+}
+
+.zigzag {
+  position: absolute;
+  top: 50%;
+
+  width: 100%;
+  height: 50%;
+
+  /*
+  linear-gradient()
+    Create a background image that is a linear gradient that moves [in this direction or at this angle]
+    and starts with [one color] and ends with [another color].
+    refer: [A Complete Guide to CSS Gradients | CSS-Tricks](https://css-tricks.com/a-complete-guide-to-css-gradients/)
+
+    background-image: linear-gradient(<direction | angle>, color1[,color1-stop], color2[, color2-top], ...
+        <direction | angle>代表渐变线的方向或角度(默认从上到下，即angle=180)，
+        color1代表着色节点的颜色(Note: transparent也是颜色)，
+            - **从着色节点终点到下一个着色节点的起点中间发生渐变，而自身节点的起点和终点间，是自己的颜色,没有渐变**
+            - 着色节点的起点从上一个着色节点的终点开始
+        [, color1-stop]是可选参数，代表着色节点的终点在渐变线上的位置,
+  */
+  background-color: #fff;
+}
+
+.zigzag::before {
+  position: absolute;
+
+  width: 100%;
+  height: 15px;
+
+  /* 可以设置多个背景图片，按照声明的顺序进行重叠 */
+  background-image: linear-gradient(
+      -45deg,
+      transparent 33.33%,
+      #ff8d8d 33.33%,
+      #ff8d8d 66.66%,
+      transparent 66.66%
+    ),
+    linear-gradient(
+      45deg,
+      transparent 33.33%,
+      #ff8d8d 33.33%,
+      #ff8d8d 66.66%,
+      transparent 66.66%
+    );
+
+  background-size: 30px 60px;
+
+  transform: rotateX(180deg);
+
+  content: "";
+}
