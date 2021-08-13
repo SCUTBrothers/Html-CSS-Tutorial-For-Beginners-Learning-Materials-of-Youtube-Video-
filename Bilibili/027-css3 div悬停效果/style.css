@@ -1,0 +1,81 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  font-family: verdana;
+
+  background-color: #eeff7a;
+
+  height: 100vh;
+}
+
+.box {
+  position: relative;
+
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  padding: 20px 10px;
+
+  /* 注意：给box设置定宽，而不是其父容器元素设置定宽 */
+  width: 250px;
+
+  transition: all 0.5s;
+}
+
+.box h1 {
+  font-size: 24px;
+
+  margin-bottom: 10px;
+
+  transition: color 0.2s;
+}
+
+.box p {
+  transition: color 0.2s;
+}
+
+.box::before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: -1;
+
+  border: 1px solid transparent;
+  border-radius: 5px;
+  width: 0;
+  height: 0;
+
+  background-color: #41da55;
+
+  transform: translate(-50%, -50%);
+
+  transition: 0.25s;
+
+  content: "";
+}
+
+.box:hover::before {
+  width: 100%;
+  height: 100%;
+}
+
+.box:hover {
+  border: 10px solid #fff;
+
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
+
+  /* 设置延时过渡，让border的变化出现在伪元素绿色盒子展开后, 有边框从内向外张开的感觉 */
+  transition-delay: 0.2s;
+}
+
+.box:hover h1,
+.box:hover p {
+  color: #fff;
+}
