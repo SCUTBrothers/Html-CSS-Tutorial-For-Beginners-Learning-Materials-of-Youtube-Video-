@@ -1,0 +1,95 @@
+/* 本代码按照 alloy team css代码规范属性声明顺序进行书写，以养成良好的习惯 */
+
+/* 样式代码的hover上下切换图标效果与033-滑动社交媒体图标所用到的知识是相同的，可以类比总结一下*/
+
+@font-face {
+  font-family: "fas";
+  src: url("../../font-awesome/webfonts/fa-solid-900.woff");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  position: relative;
+
+  height: 100vh;
+}
+
+.hamburger-icon {
+  overflow: hidden;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  border: 5px solid #663cb5;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+
+  transform: translate(-50%, -50%);
+
+  transition: background-color 0.5s;
+}
+
+.hamburger-icon:hover {
+  background-color: #663cb5;
+}
+
+.hamburger-icon::before {
+  /* 我这里是通过background-clip实现绘制三横线图标，可以参考练习一下 */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  border-top: 5px solid #663cb5;
+  border-bottom: 5px solid #663cb5;
+  padding: 10px 0;
+  width: 40px;
+  height: 5px;
+
+  background-color: #663cb5;
+  background-clip: content-box;
+
+  transform: translate(-50%, -50%);
+
+  transition: all 0.5s;
+
+  content: "";
+}
+
+.hamburger-icon::after {
+  position: absolute;
+  top: 150%;
+  left: 50%;
+
+  /*
+  下面的代码，可加可不加，不影响效果
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  line-height: 80px;
+  */
+
+  font-family: "fas";
+  font-size: 2em;
+
+  color: #fff;
+
+  transform: translate(-50%, -50%);
+
+  transition: all 0.5s;
+
+  content: "\f00d";
+}
+
+.hamburger-icon:hover::before {
+  top: -50%;
+}
+
+.hamburger-icon:hover::after {
+  top: 50%;
+}
