@@ -1,0 +1,64 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #262626;
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  border: 6px solid #262626;
+  border-top: 2px solid transparent;
+  border-radius: 15px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  width: 150px;
+  height: 180px;
+
+  background: url(./assets/images/water.png);
+  background-repeat: repeat-x; /* 关键点 */
+  background-size: contain;
+  background-position: 0 bottom;
+
+  box-shadow: 0 0 0 6px #fff, 0px 20px 30px rgba(0, 0, 0, 1);
+
+  transform: translate(-50%, -50%);
+  animation: animate 20s linear infinite;
+}
+
+.cup::before {
+  position: absolute;
+  top: 30px;
+  right: -68px;
+
+  border: 6px solid #fff;
+  border-top-right-radius: 35px;
+  border-bottom-right-radius: 35px;
+  width: 50px;
+  height: 80px;
+
+  content: '';
+}
+
+@keyframes animate {
+  0% {
+    background-position: 0 calc(100% + 100px);
+  }
+  10% {
+    background-position: 0 calc(100% + 100px);
+  }
+  40% {
+    background-position: 1000px 100%;
+  }
+  80% {
+    background-position: 2000px 100%;
+  }
+  100% {
+    background-position: 2500px calc(100% + 100px);
+  }
+}
